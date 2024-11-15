@@ -23,3 +23,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('follow-ups/{lead_id}', [FollowupController::class, 'index'])->name('follow-ups.index');
     Route::get('follow-ups', [FollowupController::class, 'getFollowUps']);
 });
+
+
