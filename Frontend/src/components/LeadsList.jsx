@@ -4,11 +4,19 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import Form from 'react-bootstrap/Form';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Modal, Button } from 'react-bootstrap';
+
+
+
+
 
 export default function LeadsList() {
   const {leads, token} = useContext(AppContext)
   const navigate = useNavigate();
+  const notify = () => toast("Wow so easy!");
 
   const [formData, setFormData] = useState({
     lead_id: '',
@@ -108,15 +116,13 @@ export default function LeadsList() {
       })
 
     const data = await res.json();
-      console.log(data);
+    console.log(data)
+
+    
       
     if(data.errors){
         setErrors(data.errors);
     } else {
-        // setLeads((prevLeads) => 
-        //   prevLeads.map((lead) => 
-        //     lead.id === formData.lead.id ? {...lead, ...data} : lead) 
-        // );
         handleCloseModal2();
         navigate("/leads");
     }
@@ -126,8 +132,9 @@ export default function LeadsList() {
 }
 
 // function to post to the backend - schedule a lead
-async function scheduleLead(e){
-  e.preventDefault();
+async function scheduleLead(id){
+    setFormData({lead_id: id, ...formData});
+
     try{
       const res = await fetch(`/api/follow-ups/`, {
           method: "POST",
@@ -139,7 +146,7 @@ async function scheduleLead(e){
 
     const data = await res.json();
     console.log(data);
-    console.log(selectedLead.id);
+    console.log(formData);
     
     
       
@@ -153,6 +160,15 @@ async function scheduleLead(e){
       console.error('Error Scheduling for follow up', error);
     }
 }
+
+const handleViewScheduleLead = async (e, lead) => {
+  e.preventDefault();
+  console.log(lead);
+  setShowModal2(false);
+  setSelectedLead(lead);
+  await scheduleLead(lead);
+  setShowModal3(true);    
+};
 
 
   return (
@@ -194,6 +210,11 @@ async function scheduleLead(e){
             )}
         </tbody>
     </table>
+
+    <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+    </div>
 
 
 
@@ -270,11 +291,11 @@ async function scheduleLead(e){
        {/* modal pop for schudeling follow up - modal 3 */}
        <Modal show={showModal3} onHide={handleCloseModal3} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Update follow up status Follow-up</Modal.Title>
+          <Modal.Title>Schudeling follow up</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <Form onSubmit={(e) => scheduleLead(e, formData.lead_id)}>
+          <Form onSubmit={(e) => handleViewScheduleLead(e, selectedLead.id)}>
               <Form.Group>
                 <Form.Label className="fw-bold">Enter the schudeling Date:</Form.Label>
                 <Form.Control
