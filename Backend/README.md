@@ -1,4 +1,4 @@
-# theLeadHub Backend API
+# Lead Management and Follow-Up Scheduling
 
 This project provides the backend API for theLeadHub, a lead management application. It uses Laravel and exposes API endpoints for managing users, leads, and follow-ups.
 

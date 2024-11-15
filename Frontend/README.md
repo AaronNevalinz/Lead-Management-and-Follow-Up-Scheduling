@@ -1,4 +1,4 @@
-# theLeadHub Frontend
+# Lead Management and Follow-Up Scheduling
 
 This project is the frontend for theLeadHub, a lead management application built with React. It provides a user interface for managing leads and their follow-ups.
 
@@ -49,12 +49,10 @@ The project has several dependencies managed by npm. See `package.json` for the 
 
 ## Context and State Management
 
-The application likely uses a React Context (`AppContext`) to manage global state, including user authentication.  This allows components to access and update shared data efficiently.
+The application uses a React Context (`AppContext`) to manage global state, including user authentication.  This allows components to access and update shared data efficiently.
 
 ## Authentication
 
 The application provides routes for `/register` and `/login`. Users need to authenticate to access features like lead and follow-up management.  Upon successful authentication, they are redirected to the dashboard.
 
-## Potential Improvements
 
-This README assumes the existence of backend API endpoints for managing leads and follow-ups, but the provided code snippet only shows the frontend routing.  More information on the backend integration and API endpoints would be beneficial.  Adding information on available props for components like `LeadsList`, `FollowUps`, etc. would also improve the documentation.
