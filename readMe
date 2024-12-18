@@ -1,1 +1,10 @@
-Lead management system for an interview by neexa.ai
+Lead management system
+
+This system leverages Laravel for backend, and built an api service using sanctrum.
+
+The frontend uses reactjs with contextApi for managing state.
+
+Tools used:
+Vscode
+git
+postman for testing
